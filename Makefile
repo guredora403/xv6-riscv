@@ -27,6 +27,8 @@ OBJS = \
   $K/exec.o \
   $K/sysfile.o \
   $K/kernelvec.o \
+  $K/getopening.o \
+  $K/rtc.o \
   $K/plic.o \
   $K/virtio_disk.o
 
@@ -120,11 +122,13 @@ UPROGS=\
 	$U/_echo\
 	$U/_forktest\
 	$U/_grep\
+	$U/_pwd\
 	$U/_init\
 	$U/_kill\
 	$U/_ln\
 	$U/_ls\
 	$U/_mkdir\
+	$U/_myecho\
 	$U/_rm\
 	$U/_sh\
 	$U/_stressfs\
@@ -160,6 +164,7 @@ QEMUOPTS = -machine virt -bios none -kernel $K/kernel -m 128M -smp $(CPUS) -nogr
 QEMUOPTS += -global virtio-mmio.force-legacy=false
 QEMUOPTS += -drive file=fs.img,if=none,format=raw,id=x0
 QEMUOPTS += -device virtio-blk-device,drive=x0,bus=virtio-mmio-bus.0
+# QEMUOPTS += -monitor telnet:localhost:1234,server,nowait
 
 qemu: $K/kernel fs.img
 	$(QEMU) $(QEMUOPTS)
