@@ -27,6 +27,9 @@ kvmmake(void)
   // uart registers
   kvmmap(kpgtbl, UART0, UART0, PGSIZE, PTE_R | PTE_W);
 
+  // goldfish RTC
+  kvmmap(kpgtbl, GOLDFISH_RTC0, GOLDFISH_RTC0, GOLDFISH_RTC0_size, PTE_R);
+
   // virtio mmio disk interface
   kvmmap(kpgtbl, VIRTIO0, VIRTIO0, PGSIZE, PTE_R | PTE_W);
 
